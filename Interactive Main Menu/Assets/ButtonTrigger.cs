@@ -25,6 +25,13 @@ public class ButtonTrigger : MonoBehaviour
     [SerializeField, Tooltip("Select an image for settings button progress bar")] private Image settingsProgressBar;
     [SerializeField, Tooltip("Select an image for quit button progress bar")] private Image quitProgressBar;
 
+    [Space(10)]
+
+    [Header("Button Materials")]
+    [SerializeField, Tooltip("Select a material for play button")] private Material playButtonMaterial;
+    [SerializeField, Tooltip("Select a material for settings button")] private Material settingsButtonMaterial;
+    [SerializeField, Tooltip("Select a material for quit button")] private Material quitButtonMaterial;
+
     /// <summary>
     /// Method that transitions from current state to a new state
     /// </summary>
@@ -52,7 +59,7 @@ public class ButtonTrigger : MonoBehaviour
         // if player enters this button then change the state to PlayButtonState and modify the progress bar.
         if (other.gameObject.tag == "Player" && this.gameObject.name == "PlayButton")
         {
-            ChangeState(new PlayButtonState(this.gameObject));
+            ChangeState(new PlayButtonState(this.gameObject, playButtonMaterial));
             buttonIsPressed = true;
 
             while (buttonIsPressed == true && timer <= 1.0f)
@@ -66,7 +73,7 @@ public class ButtonTrigger : MonoBehaviour
         // if player enters this button then change the state to SettingsButtonState and modify the progress bar.
         if (other.gameObject.tag == "Player" && this.gameObject.name == "SettingsButton")
         {
-            ChangeState(new SettingsButtonState(this.gameObject));
+            ChangeState(new SettingsButtonState(this.gameObject, settingsButtonMaterial));
             buttonIsPressed = true;
 
             while (buttonIsPressed == true && timer <= 1.0f)
@@ -80,7 +87,7 @@ public class ButtonTrigger : MonoBehaviour
         // if player enters this button then change the state to QuitButtonState and modify the progress bar.
         if (other.gameObject.tag == "Player" && this.gameObject.name == "QuitButton")
         {
-            ChangeState(new QuitButtonState(this.gameObject));
+            ChangeState(new QuitButtonState(this.gameObject, quitButtonMaterial));
             buttonIsPressed = true;
 
             while (buttonIsPressed == true && timer <= 1.0f)

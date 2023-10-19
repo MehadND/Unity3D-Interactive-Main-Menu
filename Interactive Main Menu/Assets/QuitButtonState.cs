@@ -6,16 +6,18 @@
 public class QuitButtonState : State
 {
     private GameObject quitButton;
+    private Material material;
 
-    public QuitButtonState(GameObject quitButton)
+    public QuitButtonState(GameObject quitButton, Material material)
     {
         this.quitButton = quitButton;
+        this.material = material;
     }
 
     public override void Enter()
     {
         Debug.Log("<color=red>Entering QuitButtonState</color>");
-
+        material.color = Color.red;
     }
 
     public override void Execute()
@@ -32,6 +34,8 @@ public class QuitButtonState : State
 
         // scale the button up to normal size
         quitButton.transform.localScale = new Vector3(2.5f, 0.05f, 0.5f);
+        material.color = Color.gray;
+
     }
 }
 

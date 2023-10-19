@@ -6,14 +6,17 @@
 public class PlayButtonState : State
 {
     private GameObject playButton;
+    private Material material;
 
-    public PlayButtonState(GameObject playButton)
+    public PlayButtonState(GameObject playButton, Material material)
     {
         this.playButton = playButton;
+        this.material = material;
     }
     public override void Enter()
     {
         Debug.Log("<color=green>Entering PlayButtonState</color>");
+        material.color = Color.green;
     }
 
     public override void Execute()
@@ -30,6 +33,7 @@ public class PlayButtonState : State
 
         // scale the button up to normal size
         playButton.transform.localScale = new Vector3(2.5f, 0.05f, 0.5f);
+        material.color = Color.gray;
     }
 }
 
