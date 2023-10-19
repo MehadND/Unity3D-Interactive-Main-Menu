@@ -14,4 +14,4 @@ A simple Unity project that showcases a simple FSM for handling interactions whe
 
 
 
-![flowchart.png](D:\Github\interactive-main-menu-unity\flowchart.png)
+![flowchart.png](./flowchart.png)
