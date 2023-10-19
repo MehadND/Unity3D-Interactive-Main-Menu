@@ -2,18 +2,33 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// A class for handling states of buttons when user enters or exits a button's trigger box.
+/// </summary>
+/// <remarks>
+/// Also includes functionality for modifying the timer + progress bars for each button
+/// </remarks>
 public class ButtonTrigger : MonoBehaviour
 {
     private State currentState;
 
-    public float timer = 0.0f;
-    public float timerAmount = 0.5f;
-    public bool buttonIsPressed = false;
+    [Header("Timer")]
+    private float timer = 0.0f;
+    [SerializeField, Range(0.0f, 1.0f), Tooltip("Varialbe for controlling the timer amount")] private float timerAmount = 0.1f;
+    
+    private bool buttonIsPressed = false;
 
-    public Image playProgressBar;
-    public Image settingsProgressBar;
-    public Image quitProgressBar;
+    [Space(10)]
 
+    [Header("Progress Bars")]
+    [SerializeField, Tooltip("Select an image for play button progress bar")] private Image playProgressBar;
+    [SerializeField, Tooltip("Select an image for settings button progress bar")] private Image settingsProgressBar;
+    [SerializeField, Tooltip("Select an image for quit button progress bar")] private Image quitProgressBar;
+
+    /// <summary>
+    /// Method that transitions from current state to a new state
+    /// </summary>
+    /// <param name="newState">New State</param>
     private void ChangeState(State newState)
     {
         currentState.Exit();
@@ -34,6 +49,7 @@ public class ButtonTrigger : MonoBehaviour
 
     private IEnumerator OnTriggerEnter(Collider other)
     {
+        // if player enters this button then change the state to PlayButtonState and modify the progress bar.
         if (other.gameObject.tag == "Player" && this.gameObject.name == "PlayButton")
         {
             ChangeState(new PlayButtonState(this.gameObject));
@@ -47,6 +63,7 @@ public class ButtonTrigger : MonoBehaviour
             }
         }
 
+        // if player enters this button then change the state to SettingsButtonState and modify the progress bar.
         if (other.gameObject.tag == "Player" && this.gameObject.name == "SettingsButton")
         {
             ChangeState(new SettingsButtonState(this.gameObject));
@@ -60,6 +77,7 @@ public class ButtonTrigger : MonoBehaviour
             }
         }
 
+        // if player enters this button then change the state to QuitButtonState and modify the progress bar.
         if (other.gameObject.tag == "Player" && this.gameObject.name == "QuitButton")
         {
             ChangeState(new QuitButtonState(this.gameObject));
@@ -76,6 +94,7 @@ public class ButtonTrigger : MonoBehaviour
 
     private IEnumerator OnTriggerExit(Collider other)
     {
+        // if player exits this button then change the state to IdleButtonState and modify the progress bar.
         if (other.gameObject.tag == "Player" && this.gameObject.name == "PlayButton")
         {
             ChangeState(new IdleButtonState());
@@ -89,6 +108,7 @@ public class ButtonTrigger : MonoBehaviour
             }
         }
 
+        // if player exits this button then change the state to IdleButtonState and modify the progress bar.
         if (other.gameObject.tag == "Player" && this.gameObject.name == "SettingsButton")
         {
             ChangeState(new IdleButtonState());
@@ -102,6 +122,7 @@ public class ButtonTrigger : MonoBehaviour
             }
         }
 
+        // if player exits this button then change the state to IdleButtonState and modify the progress bar.
         if (other.gameObject.tag == "Player" && this.gameObject.name == "QuitButton")
         {
             ChangeState(new IdleButtonState());

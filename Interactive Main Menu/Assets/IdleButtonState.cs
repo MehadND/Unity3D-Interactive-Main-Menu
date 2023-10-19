@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 
-
+/// <summary>
+/// A class for handling states for Idle Button
+/// /// </summary>
 public class IdleButtonState : State
 {
     public override void Enter()
